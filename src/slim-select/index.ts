@@ -432,9 +432,9 @@ export default class SlimSelect {
   }
 
   // Take in string value and search current options
-  public search(value: string): void {
+  public search(value: string, force:boolean = false): void {
     // Only filter data and rerender if value has changed
-    if (this.data.searchValue === value) { return }
+    if (this.data.searchValue === value && !force) { return }
 
     this.slim.search.input.value = value
     if (this.config.isAjax) {

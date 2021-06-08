@@ -936,8 +936,9 @@ var SlimSelect = (function () {
         this.slim.search.input.disabled = true;
         this.select.triggerMutationObserver = true;
     };
-    SlimSelect.prototype.search = function (value) {
-        if (this.data.searchValue === value) {
+    SlimSelect.prototype.search = function (value, force) {
+        if (force === void 0) { force = false; }
+        if (this.data.searchValue === value && !force) {
             return;
         }
         this.slim.search.input.value = value;
