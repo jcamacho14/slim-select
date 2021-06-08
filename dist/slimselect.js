@@ -745,9 +745,9 @@ var SlimSelect = (function () {
             }
             else {
                 newData.unshift(selected);
-                for (var i = 0; i < newData.length; i++) {
+                for (var i = 1; i < newData.length; i++) {
                     if (!newData[i].placeholder && newData[i].value === selected.value && newData[i].text === selected.text) {
-                        delete newData[i];
+                        newData.splice(i, 1);
                     }
                 }
                 var hasPlaceholder = false;

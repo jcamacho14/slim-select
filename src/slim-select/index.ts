@@ -212,9 +212,9 @@ export default class SlimSelect {
         newData.unshift(selected)
 
         // Look for duplicate selected if so remove it
-        for (let i = 0; i < newData.length; i++) {
+        for (let i = 1; i < newData.length; i++) {
           if (!newData[i].placeholder && newData[i].value === (selected as Option).value && newData[i].text === (selected as Option).text) {
-            delete newData[i]
+            newData.splice(i, 1);
           }
         }
 
