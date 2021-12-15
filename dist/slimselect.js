@@ -936,9 +936,8 @@ var SlimSelect = (function () {
         this.slim.search.input.disabled = true;
         this.select.triggerMutationObserver = true;
     };
-    SlimSelect.prototype.search = function (value, force) {
-        if (force === void 0) { force = false; }
-        if (this.data.searchValue === value && !force) {
+    SlimSelect.prototype.search = function (value) {
+        if (this.data.searchValue === value) {
             return;
         }
         this.slim.search.input.value = value;
@@ -948,17 +947,22 @@ var SlimSelect = (function () {
             this.render();
             if (this.ajax) {
                 this.ajax(value, function (info) {
+                    console.log("--- Search Callback -----------------");
+                    console.log(info);
                     master_1.config.isSearching = false;
                     if (Array.isArray(info)) {
+                        console.log('If Array');
                         info.unshift({ text: '', placeholder: true });
                         master_1.setData(info);
                         master_1.data.search(value);
                         master_1.render();
                     }
                     else if (typeof info === 'string') {
+                        console.log('Else If');
                         master_1.slim.options(info);
                     }
                     else {
+                        console.log('Else');
                         master_1.render();
                     }
                 });

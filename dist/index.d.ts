@@ -62,7 +62,7 @@ export default class SlimSelect {
     moveContentBelow(): void;
     enable(): void;
     disable(): void;
-    search(value: string, force?: boolean): void;
+    search(value: string): void;
     setSearchText(text: string): void;
     render(): void;
     destroy(id?: string | null): void;

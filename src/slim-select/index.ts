@@ -214,6 +214,7 @@ export default class SlimSelect {
         // Look for duplicate selected if so remove it
         for (let i = 1; i < newData.length; i++) {
           if (!newData[i].placeholder && newData[i].value === (selected as Option).value && newData[i].text === (selected as Option).text) {
+            // delete newData[i]
             newData.splice(i, 1);
           }
         }
@@ -432,9 +433,9 @@ export default class SlimSelect {
   }
 
   // Take in string value and search current options
-  public search(value: string, force:boolean = false): void {
+  public search(value: string): void {
     // Only filter data and rerender if value has changed
-    if (this.data.searchValue === value && !force) { return }
+    if (this.data.searchValue === value) { return }
 
     this.slim.search.input.value = value
     if (this.config.isAjax) {
@@ -445,16 +446,21 @@ export default class SlimSelect {
       // If ajax call it
       if (this.ajax) {
         this.ajax(value, (info: any) => {
+          console.log(`--- Search Callback -----------------`);
+          console.log(info);
           // Only process if return callback is not false
           master.config.isSearching = false
           if (Array.isArray(info)) {
+            console.log('If Array');
             info.unshift({ text: '', placeholder: true })
             master.setData(info)
             master.data.search(value)
             master.render()
           } else if (typeof info === 'string') {
+            console.log('Else If');
             master.slim.options(info)
           } else {
+            console.log('Else');
             master.render()
           }
         })
